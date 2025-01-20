@@ -15,16 +15,18 @@ st.set_page_config(
 # Set the path to your local nltk_data directory
 nltk.data.path.append(os.path.join(os.path.dirname(__file__), 'nltk_data'))
 
-# Skip downloading 'punkt' and 'stopwords' during runtime, as they are already in the 'nltk_data' directory
+# Check if necessary NLTK data is present and download it if necessary
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
-    st.error("NLTK 'punkt' tokenizer not found. Please check your nltk_data directory.")
+    st.write("🔄 Downloading 'punkt' tokenizer...")
+    nltk.download('punkt', download_dir=os.path.join(os.path.dirname(__file__), 'nltk_data'))
 
 try:
     nltk.data.find('corpora/stopwords')
 except LookupError:
-    st.error("NLTK 'stopwords' not found. Please check your nltk_data directory.")
+    st.write("🔄 Downloading 'stopwords' corpus...")
+    nltk.download('stopwords', download_dir=os.path.join(os.path.dirname(__file__), 'nltk_data'))
 
 # Function to preprocess the text
 def transform_text(text):
