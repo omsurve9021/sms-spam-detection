@@ -5,6 +5,10 @@ from nltk.corpus import stopwords
 import nltk
 import os
 
+# Download necessary NLTK data
+nltk.download('punkt', download_dir=os.path.join(os.path.dirname(__file__), 'nltk_data'))
+nltk.download('stopwords', download_dir=os.path.join(os.path.dirname(__file__), 'nltk_data'))
+
 # Set the page config first, before anything else
 st.set_page_config(
     page_title="SMS Spam Detection",
@@ -14,19 +18,6 @@ st.set_page_config(
 
 # Set the path to your local nltk_data directory
 nltk.data.path.append(os.path.join(os.path.dirname(__file__), 'nltk_data'))
-
-# Check if necessary NLTK data is present and download it if necessary
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    st.write("🔄 Downloading 'punkt' tokenizer...")
-    nltk.download('punkt', download_dir=os.path.join(os.path.dirname(__file__), 'nltk_data'))
-
-try:
-    nltk.data.find('corpora/stopwords')
-except LookupError:
-    st.write("🔄 Downloading 'stopwords' corpus...")
-    nltk.download('stopwords', download_dir=os.path.join(os.path.dirname(__file__), 'nltk_data'))
 
 # Function to preprocess the text
 def transform_text(text):
