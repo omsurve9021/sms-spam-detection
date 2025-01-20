@@ -3,6 +3,14 @@ import pickle
 import string
 from nltk.corpus import stopwords
 import nltk
+import os
+
+# Set the path to your local nltk_data directory
+nltk.data.path.append(os.path.join(os.path.dirname(__file__), 'nltk_data'))
+
+# No need to download 'punkt' during runtime
+
+
 nltk.download('punkt')
 nltk.download('stopwords')
 from nltk.stem.porter import PorterStemmer
