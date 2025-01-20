@@ -5,9 +5,16 @@ from nltk.corpus import stopwords
 import nltk
 import os
 
-# Download necessary NLTK data
-nltk.download('punkt', download_dir=os.path.join(os.path.dirname(__file__), 'nltk_data'))
-nltk.download('stopwords', download_dir=os.path.join(os.path.dirname(__file__), 'nltk_data'))
+# Ensure that nltk data is available
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt', download_dir=os.path.join(os.path.dirname(__file__), 'nltk_data'))
+
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('stopwords', download_dir=os.path.join(os.path.dirname(__file__), 'nltk_data'))
 
 # Set the page config first, before anything else
 st.set_page_config(
