@@ -5,6 +5,13 @@ from nltk.corpus import stopwords
 import nltk
 import os
 
+# Set the page config first, before anything else
+st.set_page_config(
+    page_title="SMS Spam Detection",
+    page_icon="📩",
+    layout="centered",
+)
+
 # Set the path to your local nltk_data directory
 nltk.data.path.append(os.path.join(os.path.dirname(__file__), 'nltk_data'))
 
@@ -45,13 +52,6 @@ with open('vectorizer (1).pkl', 'rb') as file:
 
 with open('model.pkl', 'rb') as file:
     model = pickle.load(file)
-
-# Streamlit app
-st.set_page_config(
-    page_title="SMS Spam Detection",
-    page_icon="📩",
-    layout="centered",
-)
 
 # Custom CSS for styling
 st.markdown(
