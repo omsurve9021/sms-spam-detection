@@ -8,12 +8,16 @@ import os
 # Set the path to your local nltk_data directory
 nltk.data.path.append(os.path.join(os.path.dirname(__file__), 'nltk_data'))
 
-# No need to download 'punkt' during runtime
+# Skip downloading 'punkt' and 'stopwords' during runtime, as they are already in the 'nltk_data' directory
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    st.error("NLTK 'punkt' tokenizer not found. Please check your nltk_data directory.")
 
-
-nltk.download('punkt')
-nltk.download('stopwords')
-from nltk.stem.porter import PorterStemmer
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    st.error("NLTK 'stopwords' not found. Please check your nltk_data directory.")
 
 # Function to preprocess the text
 def transform_text(text):
@@ -30,7 +34,7 @@ def transform_text(text):
     text = [i for i in text if i not in stopwords.words('english') and i not in string.punctuation]
 
     # Stemming
-    ps = PorterStemmer()
+    ps = nltk.PorterStemmer()
     text = [ps.stem(i) for i in text]
 
     return " ".join(text)
